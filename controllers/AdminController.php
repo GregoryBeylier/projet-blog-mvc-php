@@ -32,20 +32,58 @@ class AdminController
     {
         $this->checkIfUserIsConnected();
 
+        // 1. Récupérer les paramètres de tri
+        $sort = Utils::request("sort", "title"); // "title" par défaut
+        $order = Utils::request("order", "asc"); // "asc" par défaut
+
+        $allowedSorts = ["title", "views", "commentCount", "dateCreation"];
+        $allowedOrders = ["asc", "desc"];
+
+        if (!in_array($sort, $allowedSorts)) {
+            $sort = "title";
+        }
+        if (!in_array($order, $allowedOrders)) {
+            $order = "asc";
+        }
+
+        // 2. Récupérer les articles triés
         $articleManager = new ArticleManager();
         $articles = $articleManager->getAllArticles();
 
+        // 3. Récupérer les compteurs de commentaires
         $commentManager = new CommentManager();
         $commentCounts = [];
-
         foreach ($articles as $article) {
             $commentCounts[$article->getId()] = $commentManager->countCommentsByArticleId($article->getId());
         }
 
+        $articlesWithStats = [];
+        foreach ($articles as $article) {
+            $articlesWithStats[] = [
+                'article' => $article,
+                'title' => $article->getTitle(),
+                'views' => $article->getViews(),
+                'dateCreation' => $article->getDateCreation()->format("Y-m-d"),
+                'commentCount' => $commentCounts[$article->getId()] ?? 0
+            ];
+        }
+
+        usort($articlesWithStats, function ($a, $b) use ($sort, $order) {
+            if ($a[$sort] == $b[$sort]) {
+                return 0;
+            }
+            if ($order == "asc") {
+                return ($a[$sort] < $b[$sort]) ? -1 : 1;
+            } else {
+                return ($a[$sort] > $b[$sort]) ? -1 : 1;
+            }
+        });
+
         $view = new View("Monitoring");
         $view->render("monitoring", [
-            'articles' => $articles,
-            'commentCounts' => $commentCounts
+            'articles' => $articlesWithStats,
+            'sort' => $sort,
+            'order' => $order
         ]);
     }
 

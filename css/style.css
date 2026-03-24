@@ -373,3 +373,8 @@ tr:nth-child(even) {
     background-color: #efe1ba;
 }
 
+.menu {
+    display: flex;
+    gap: 20px;  
+    align-items: center;
+}

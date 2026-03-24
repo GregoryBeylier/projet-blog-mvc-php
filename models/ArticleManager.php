@@ -14,12 +14,12 @@ class ArticleManager extends AbstractEntityManager
         $sql = "SELECT * FROM article";
         $result = $this->db->query($sql);
         $articles = [];
-
         while ($article = $result->fetch()) {
             $articles[] = new Article($article);
         }
         return $articles;
     }
+
 
     /**
      * Récupère un article par son id.
