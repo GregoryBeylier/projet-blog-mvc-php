@@ -360,19 +360,16 @@ table {
 
 th, td {
     padding: 12px 15px;
-    border: 1px solid #ddd;
-    text-align: left;
+    border: 1px solid var(--headerColor);
+    text-align: center;
 }
 
 th {
-    background-color: #f4f4f4;
+    background-color: #d79922;
     font-weight: bold;
 }
 
 tr:nth-child(even) {
-    background-color: #fafafa;
+    background-color: #efe1ba;
 }
 
-tr:hover {
-    background-color: #f1f1f1;
-}

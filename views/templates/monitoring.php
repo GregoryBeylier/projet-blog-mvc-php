@@ -1,4 +1,4 @@
-<h2>tableau de bord</h2>
+<h2>TABELEAU DE BORD</h2>
 <table>
     <thead> <!-- l'en-tête -->
         <tr>
@@ -14,7 +14,7 @@
 
     <tbody>
         <?php foreach ($articles as $article) { ?>
-            <tr class="articleLine">
+            <tr class="monitoringLine">
                 <td class="title"><?= $article->getTitle() ?></td>
                 <td class="views"><?= $article->getViews() ?></td>
                 <td class="commentCount"><?= $commentCounts[$article->getId()] ?></td>
