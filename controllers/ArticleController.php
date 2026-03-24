@@ -15,24 +15,23 @@ class ArticleController
         $view->render("home", ['articles' => $articles]);
     }
 
-    /**
-     * Affiche le détail d'un article.
-     * @return void
-     */
+    // Affiche le détail d'un article.
+
     public function showArticle(): void
     {
-        // Récupération de l'id de l'article demandé.
         $id = Utils::request("id", -1);
 
         $articleManager = new ArticleManager();
+
+        // Incrémentation AVANT la récupération
+        $articleManager->addviews($id);
+
+        // Maintenant on récupère l'article mis à jour
         $article = $articleManager->getArticleById($id);
 
         if (!$article) {
             throw new Exception("L'article demandé n'existe pas.");
         }
-
-        // Incrémentation du nombre de vues de l'article
-        $articleManager->addviews($id);
 
         $commentManager = new CommentManager();
         $comments = $commentManager->getAllCommentsByArticleId($id);

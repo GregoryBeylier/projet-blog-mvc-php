@@ -132,7 +132,7 @@ class Article extends AbstractEntity
     /**
      * setter pour le nombre de vues.
      */
-    public function setviews(int $views): void
+    public function setViews(int $views): void
     {
         $this->views = $views;
     }
@@ -142,7 +142,7 @@ class Article extends AbstractEntity
      * @return int
      */
 
-    public function getview(): int
+    public function getViews(): int
     {
         return $this->views;
     }

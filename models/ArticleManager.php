@@ -96,7 +96,7 @@ class ArticleManager extends AbstractEntityManager
     //affichage du nombre de vues d'un article
     public function addviews(int $id): void
     {
-        $sql = "UPDATE article SET views = views + 1 WHERE id = :id";
+        $sql = "UPDATE article SET Views = Views + 1 WHERE id = :id";
         $this->db->query($sql, ['id' => $id]);
     }
 }
