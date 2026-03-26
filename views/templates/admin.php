@@ -6,6 +6,7 @@
  */
 ?>
 <div class="menu">
+    <a class="submit" href="http://localhost/index.php"> Accueil</a>
     <a class="submit" href="index.php?action=showMonitoring"> Tableau de bord</a>
     <a class="submit" href="index.php?action=showUpdateArticleForm"> Ajouter</a>
 </div>

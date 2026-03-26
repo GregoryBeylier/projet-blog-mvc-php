@@ -1,12 +1,12 @@
 <?php
 
-class CommentController 
+class CommentController
 {
     /**
      * Ajoute un commentaire.
      * @return void
      */
-    public function addComment() : void
+    public function addComment(): void
     {
         // Récupération des données du formulaire.
         $pseudo = Utils::request("pseudo");
@@ -43,5 +43,45 @@ class CommentController
 
         // On redirige vers la page de l'article.
         Utils::redirect("showArticle", ['id' => $idArticle]);
+    }
+
+    // Vérifie que l'utilisateur est connecté. Si ce n'est pas le cas, on le redirige vers la page de connexion.
+    private function checkIfUserIsConnected(): void
+    {
+        if (!isset($_SESSION['user'])) {
+            Utils::redirect("connectionForm");
+        }
+    }
+
+    public function deleteComment()
+    {
+        // Vérifie que l'utilisateur est admin
+        if (!isset($_SESSION['user'])) {
+            Utils::redirect("connectionForm");
+            return;
+        }
+
+        $this->checkIfUserIsConnected();
+
+        // Récupération de l'id du commentaire à supprimer.
+        $id = Utils::request("id");
+
+        // On vérifie que le commentaire existe.
+        $commentManager = new CommentManager();
+        $comment = $commentManager->getCommentById($id);
+        if (!$comment) {
+            throw new Exception("Le commentaire demandé n'existe pas.");
+        }
+
+        // On supprime le commentaire.
+        $result = $commentManager->deleteComment($id);
+
+        // On vérifie que la suppression a bien fonctionné.
+        if (!$result) {
+            throw new Exception("Une erreur est survenue lors de la suppression du commentaire.");
+        }
+
+        // On redirige vers la page de l'article.
+        Utils::redirect("showArticle", ['id' => $comment->getIdArticle()]);
     }
 }

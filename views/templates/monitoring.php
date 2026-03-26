@@ -35,7 +35,7 @@
     <tbody>
         <?php $i = 0; ?>
         <?php foreach ($articles as $article): ?>
-            <tr class="monitoringLine" style="background-color: <?= ($i % 2 == 0) ? '#f9f9f9' : '#ffffff' ?>">
+            <tr class="tr" style="background-color: <?= ($i % 2 == 0) ? '#f9f9f9' : '#EDE1BB' ?>">
                 <td><?= htmlspecialchars($article['title']) ?></td>
                 <td><?= $article['views'] ?></td>
                 <td><?= $article['commentCount'] ?></td>

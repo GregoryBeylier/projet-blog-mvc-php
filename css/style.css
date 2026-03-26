@@ -365,12 +365,12 @@ th, td {
 }
 
 th {
-    background-color: #d79922;
+    background-color: #D29A2C;
     font-weight: bold;
 }
 
 tr:nth-child(even) {
-    background-color: #efe1ba;
+    background-color: #ede1bb;
 }
 
 .menu {
