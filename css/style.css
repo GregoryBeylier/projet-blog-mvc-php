@@ -163,8 +163,8 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80%;
-    max-width: 1000px;
+    width: 90%;
+    max-width: 1366px;
     margin: 0 50px 100px 50px;
 }
 
@@ -377,4 +377,9 @@ tr:nth-child(even) {
     display: flex;
     gap: 20px;  
     align-items: center;
+}
+
+.tableMonitoring {
+    width: 100%;
+    max-width: 1920px;
 }

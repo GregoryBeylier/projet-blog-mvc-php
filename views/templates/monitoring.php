@@ -1,5 +1,5 @@
 <h2>TABELEAU DE BORD</h2>
-<table>
+<table class="tableMonitoring">
     <thead> <!-- l'en-tête -->
 
         <div style="margin-bottom: 15px;">
